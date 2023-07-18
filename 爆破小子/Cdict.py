@@ -4,8 +4,6 @@ import argparse
 import textwrap
 import sys
 import threading
-import string
-import random
 import secrets
 
 
@@ -60,12 +58,16 @@ class PasswordGenerator:
     def generate_password(self, count):
         wordlist = []
         passwords = []
-        for arg_name in self.handlers.keys():
-            if getattr(self.args, arg_name):
-                wordlist += self.handlers[arg_name]
-        for _ in range(count):
-            passwords.append(self.generate_password_from_wordlist(
-                wordlist, self.args.length, self.handler_special))
+        try:
+            for arg_name in self.handlers.keys():
+                if getattr(self.args, arg_name):
+                    wordlist += self.handlers[arg_name]
+            for _ in range(count):
+                passwords.append(self.generate_password_from_wordlist(
+                    wordlist, self.args.length, self.handler_special))
+        except Exception as e:
+            print(f'[-] Error: {e}')
+            sys.exit(0)
         print(passwords)
         return passwords
 
