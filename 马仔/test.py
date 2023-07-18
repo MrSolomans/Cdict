@@ -2,7 +2,7 @@ import github3
 
 
 def github_connect():
-    with open('/Users/xuzian/lualu/mytooook.txt') as f:
+    with open('path') as f:
         token = f.read()
     print(type(token))
     user = 'MrSolomans'
